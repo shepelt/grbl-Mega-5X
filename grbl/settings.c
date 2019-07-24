@@ -57,7 +57,13 @@ const __flash settings_t defaults = {\
     .acceleration[Z_AXIS] = DEFAULT_Z_ACCELERATION,
     .max_travel[X_AXIS] = (-DEFAULT_X_MAX_TRAVEL),
     .max_travel[Y_AXIS] = (-DEFAULT_Y_MAX_TRAVEL),
-    .max_travel[Z_AXIS] = (-DEFAULT_Z_MAX_TRAVEL)};
+    .max_travel[Z_AXIS] = (-DEFAULT_Z_MAX_TRAVEL),
+    #ifdef HAS_DIGIPOTS
+    .current[X_AXIS] = DEFAULT_X_CURRENT,
+    .current[Y_AXIS] = DEFAULT_Y_CURRENT,
+    .current[Z_AXIS] = DEFAULT_Z_CURRENT,
+    #endif // HAS_DIGIPOTS
+};
 
 
 // Method to store startup lines into EEPROM
@@ -215,6 +221,12 @@ uint8_t settings_store_global_setting(uint8_t parameter, float value) {
             break;
           case 2: settings.acceleration[parameter] = value*60*60; break; // Convert to mm/min^2 for grbl internal use.
           case 3: settings.max_travel[parameter] = -value; break;  // Store as negative for grbl internal use.
+          #ifdef HAS_DIGIPOTS
+          case 4:
+            settings.current[parameter] = value;
+            set_current(parameter, settings.current[parameter]);
+            break;
+          #endif // HAS_DIGIPOTS
         }
         break; // Exit while-loop after setting has been configured and proceed to the EEPROM write call.
       } else {

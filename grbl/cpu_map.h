@@ -130,6 +130,23 @@
   #define SPINDLE_PWM_PORT  PORTH
   #define SPINDLE_PWM_BIT		4 // MEGA2560 Digital Pin 7
 
+  // DigiPot pins
+  // #define HAS_DIGIPOTS
+  // DigiPot Slave Select (SS) pin configuration
+  #define DIGIPOTSS_DDR DDRD
+  #define DIGIPOTSS_PORT PORTD
+  #define DIGIPOTSS_BIT 7
+  #define SPI_DDR DDRB
+  #define SPI_PORT PORTB
+  #define MOSI_BIT 2
+  #define SCK_BIT 1
+  #define SS_BIT 0
+
+  // X Y Z digipot channels to stepper driver mapping
+  #define DIGIPOT_CHANNELS  { 4,5,3 }
+  #ifndef DIGIPOT_MOTOR_CURRENT
+    #define DIGIPOT_MOTOR_CURRENT { 135,135,135 }   // Values 0-255
+  #endif
 #endif
 
 #ifdef CPU_MAP_2560_RAMPS_BOARD // (Arduino Mega 2560) with Ramps 1.4 Board

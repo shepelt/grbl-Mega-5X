@@ -622,6 +622,13 @@
 #define RPM_LINE_A4  1.203413e-01  // Used N_PIECES = 4. A and B constants of line 4.
 #define RPM_LINE_B4  1.151360e+03
 
+// When HAS_DIGIPOTS is defined in cpu_map.h, these values get sent over SPI during initialization
+// to configure the DigiPots, thus programatically setting the stepper current. This code
+// has been tested to work with AD5206 DigiPots but may work with other SPI-based DigiPots
+// as well.
+#define DEFAULT_X_CURRENT 135
+#define DEFAULT_Y_CURRENT 135
+#define DEFAULT_Z_CURRENT 135
 
 /* ---------------------------------------------------------------------------------------
    OEM Single File Configuration Option
