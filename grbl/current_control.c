@@ -28,22 +28,19 @@
 void current_init()
 {
     static const uint8_t digipot_motor_current[] = DIGIPOT_MOTOR_CURRENT;
-    // if the SS pin is not already configured as an output
-    // then set it high (to enable the internal pull-up resistor)
-    // if(!(SPI_PORT & SS_BIT)){
-    //     SPI_PORT |= (1 << SS);
-    // }
+    // Set the SS pin to high
+    SPI_DDR |= (1<<SS_BIT);
 
     // Set DIGIPOTSS_PIN as output
     DIGIPOTSS_DDR |= 1<<DIGIPOTSS_BIT;
     // Set MOSI, SCK as Output
-    SPI_DDR |= (1<<MOSI_BIT)|(1<<SCK_BIT)
+    SPI_DDR |= (1<<MOSI_BIT)|(1<<SCK_BIT);
 
-    // Initialize SPI as master with clk/16
-    SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+    // Initialize SPI as master
+    SPCR = (1<<SPE)|(1<<MSTR);
 
-    for (uint8_t i = 0; i < COUNT(digipot_motor_current); i++) {
-        //digitalPotWrite(digipot_ch[i], digipot_motor_current[i]);
+    uint8_t i;
+    for (i = 0; i < N_AXIS; i++) {
         set_current(i, digipot_motor_current[i]);
     }
 }
@@ -55,15 +52,17 @@ inline static uint8_t spi_transfer(uint8_t data)
     return SPDR;
 }
 
-void set_current(uint8_t motor, float amps)
+void set_current(uint8_t motor, uint8_t value)
 {
+    const uint8_t digipot_ch[] = DIGIPOT_CHANNELS;
+
     // Take the SS pin low to select the chip
-    DIGIPOTSS_PORT &= ~(1<<DIGIPOTSS_BIT)
+    DIGIPOTSS_PORT &= ~(1<<DIGIPOTSS_BIT);
     // Send the address and value via SPI
-    spi_transfer(address);
+    spi_transfer(digipot_ch[motor]);
     spi_transfer(value);
     // Take the SS pin high to de-select the chip
-    DIGIPOTSS_PORT |= (1<<DIGIPOTSS_BIT)
+    DIGIPOTSS_PORT |= (1<<DIGIPOTSS_BIT);
 }
 
 #endif // HAS_DIGIPOTS

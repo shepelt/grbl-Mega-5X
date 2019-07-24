@@ -23,4 +23,4 @@
 #include <stdint.h>
 
 void current_init();
-void set_current(uint8_t motor, float amps);
+void set_current(uint8_t motor, uint8_t value);
