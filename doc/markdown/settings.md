@@ -257,3 +257,7 @@ Again, like the max rate setting, the simplest way to determine the values for t
 #### $130, $131, $132 – [X,Y,Z] Max travel, mm
 
 This sets the maximum travel from end to end for each axis in mm. This is only useful if you have soft limits (and homing) enabled, as this is only used by Grbl's soft limit feature to check if you have exceeded your machine limits with a motion command.
+
+#### $140, $141, $142 – [X,Y,Z] DigiPot setting, integer
+
+This is the value sent to the digital potentiometer (if present) to control how much current is provided by the stepper drivers.
