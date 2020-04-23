@@ -528,15 +528,15 @@
   #define SPINDLE_ENABLE_BIT      6 // Motor Extension 2 Pin 4 - D31 / PC6
   #define SPINDLE_DIRECTION_DDR   DDRC
   #define SPINDLE_DIRECTION_PORT  PORTC
-  #define SPINDLE_DIRECTION_BIT   5 // Motor Extension 1 Pin 4 - D32 / PC5
+  #define SPINDLE_DIRECTION_BIT   7 // Motor Extension 3 Pin 7 - D30 / PC7
 
   // Define flood and mist coolant enable output pins.
-  #define COOLANT_FLOOD_DDR   DDRH
-  #define COOLANT_FLOOD_PORT  PORTH
-  #define COOLANT_FLOOD_BIT   6 // Extruder 0 (Heat-0) - D9 / PH6
-  #define COOLANT_MIST_DDR    DDRH
-  #define COOLANT_MIST_PORT   PORTH
-  #define COOLANT_MIST_BIT    4 // Extruder 1 (Heat-1) - D7 / PH4
+  #define COOLANT_FLOOD_DDR   DDRC
+  #define COOLANT_FLOOD_PORT  PORTC
+  #define COOLANT_FLOOD_BIT   5 // Motor Extension 1 Pin 4 - D32 / PC5
+  #define COOLANT_MIST_DDR    DDRC
+  #define COOLANT_MIST_PORT   PORTC
+  #define COOLANT_MIST_BIT    5 // Motor Extension 1 Pin 4 - D32 / PC5
 
   // Define user-control CONTROLs (cycle start, reset, feed hold) input pins.
   // NOTE: All CONTROLs pins must be on the same port and not on a port with other input pins (limits).
