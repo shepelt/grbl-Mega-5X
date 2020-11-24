@@ -151,9 +151,9 @@
     #define HOMING_CYCLE_2 (1<<AXIS_1) // Home X axis
     #define HOMING_CYCLE_3 (1<<AXIS_2) // Home Y axis
   #elif N_AXIS == 5 // 5 axis : homing
-    #define HOMING_CYCLE_0 ((1<<AXIS_1)|(1<<AXIS_4))   //HomeX
-    #define HOMING_CYCLE_1 ((1<<AXIS_2)|(1<<AXIS_5))  // HomeY
-    // #define HOMING_CYCLE_3 (1<<AXIS_3) // OPTIONAL: Home Z axis
+    #define HOMING_CYCLE_0 ((1<<AXIS_3)|(1<<AXIS_4))  // Home Z axis first to clear workspace.
+    #define HOMING_CYCLE_1 (1<<AXIS_1)                // HomeX
+    #define HOMING_CYCLE_2 ((1<<AXIS_2)|(1<<AXIS_5))  // HomeY
   #elif N_AXIS == 6 // 6 axis : homing
     #define HOMING_CYCLE_0 (1<<AXIS_3) // Home Z axis first to clear workspace.
     #define HOMING_CYCLE_1 (1<<AXIS_4) // Home 4th axis (A)
@@ -268,7 +268,7 @@
   // By default, most MPCNCs have normally closed (NC) min limit switch on x (AXIS_1),
   // cloned x (AXIS_4), y (AXIS_2) and cloned y (AXIS_5).
   // Do *NOT* use $5=1 as it won't work (keep $5=0)
-  #define INVERT_MIN_LIMIT_PIN_MASK ((1<<AXIS_1) | (1<<AXIS_2) | (1<<AXIS_4) | (1<<AXIS_5))
+  #define INVERT_MIN_LIMIT_PIN_MASK ((1<<AXIS_1) | (1<<AXIS_2) | (1<<AXIS_3) | (1<<AXIS_4) | (1<<AXIS_5))
 #endif
 
 // Inverts the spindle enable pin from low-disabled/high-enabled to low-enabled/high-disabled. Useful
